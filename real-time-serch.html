@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script src="vue.js"></script>
+    
+    <div id="app">
+      <input type="text" v-model="keyword">
+      <table>
+        <tr v-for="user in filteredUsers">
+          <td v-text="user.id"></td>
+          <td v-text="user.name"></td>
+          <td v-text="user.email"></td>
+        </tr>
+      </table>
+    </div>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script> -->
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          keyword: '',
+          users: [
+            {
+              id: 1,
+              name: '茂木',
+              email: 'mogi@example.com'
+            },
+            {
+              id: 2,
+              name: '茂木雄一郎',
+              email: 'mogiyouichiro@example.com'
+            },
+            {
+              id: 3,
+              name: '鈴木太郎',
+              email: 'suzuki@example.com'
+            },
+            {
+              id: 4,
+              name: '田中太郎',
+              email: 'tanaka@example.com'
+            },
+          ]
+        },
+        computed: {
+          filteredUsers: function() {
+              var users = [];
+              for(var i in this.users) {
+                  var user = this.users[i];
+                  if(user.name.indexOf(this.keyword) !== -1 ||
+                      user.email.indexOf(this.keyword) !== -1) {
+                      users.push(user);
+                  }
+              }
+              return users;
+          }
+        }
+       });
+    </script>
+  </body>
+</html>
